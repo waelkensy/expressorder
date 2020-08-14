@@ -30,7 +30,13 @@ class Expressorder extends \Magento\Checkout\Controller\Cart\Add implements Http
 
     public function execute()
     {
-        /* @TODO ADD FORMKEY VALIDATOR */
+        if (!$this->_formKeyValidator->validate($this->getRequest())) {
+            $this->messageManager->addErrorMessage(
+                __('Your session has expired')
+            );
+
+            return $this->resultRedirectFactory->create()->setPath('*/*/');
+        }
 
         $params = $this->getRequest()->getParams();
         if (isset($params)) {
@@ -60,12 +66,14 @@ class Expressorder extends \Magento\Checkout\Controller\Cart\Add implements Http
 
                 return $this->goBack(null, $product);
             } catch (\Exception $exception) {
-                var_dump($exception->getMessage()); die;
+                var_dump($exception->getMessage());
+                die;
                 $this->messageManager->addExceptionMessage(
                     $exception,
                     __('We can\'t add this item to your shopping cart right now.')
                 );
                 $this->_objectManager->get(\Psr\Log\LoggerInterface::class)->critical($exception);
+
                 return $this->goBack();
             }
         }

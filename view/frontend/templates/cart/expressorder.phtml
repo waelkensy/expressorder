@@ -11,6 +11,7 @@
         <form id="expressorder-form"
               action="<?= $block->escapeUrl($block->getUrl('checkout/cart/expressorder')) ?>"
               method="post">
+            <input name="form_key" type="hidden" value="<?= $block->escapeHtmlAttr($block->getFormKey()) ?>" />
             <input type="text"
                    class="input-text"
                    id="expressorder_sku"
