@@ -1,0 +1,30 @@
+<div class="block expressorder"
+     id="block-expressorder"
+     data-mage-init='{"collapsible":{"active": "true", "openedState": "active", "saveState": false}}'
+>
+
+    <div class="title" data-role="title">
+        <strong id="block-expressorder-heading" role="heading"
+                aria-level="2"><?= $block->escapeHtml(__('Express Order')) ?></strong>
+    </div>
+    <div class="content" data-role="content" aria-labelledby="block-expressorder-heading">
+        <form id="expressorder-form"
+              action="<?= $block->escapeUrl($block->getUrl('checkout/cart/expressorder')) ?>"
+              method="post">
+            <input type="text"
+                   class="input-text"
+                   id="expressorder_sku"
+                   name="product"
+                   placeholder="<?= $block->escapeHtmlAttr(__('Enter a sku')) ?>"
+            />
+            <div class="actions-toolbar">
+                    <div class="primary">
+                        <button type="submit" value="<?= $block->escapeHtmlAttr(__('Add Sku')) ?>">
+                            <span><?= $block->escapeHtml(__('Add Skus')) ?></span>
+                        </button>
+                    </div>
+            </div>
+    </div>
+        </form>
+
+    </div>
